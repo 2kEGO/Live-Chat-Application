@@ -1,6 +1,7 @@
 .room-container {
-    background-color: black;
+    /* background-color: black; */
     height: 100vh; /* Add this to fill screen */
+    background-color: black;
   }
   
   .room-wrapper {
@@ -12,17 +13,20 @@
   
 
 .chat-list-section{
-    flex: 2;
+    flex: 3;
     height: 100%;
     
     border-right: 0.1px solid white;
 
+    
+
+
 }
 
 .chat-section{
-    flex: 8;
+    flex: 7;
     height: 100%;
     /* border: 1px solid black; */
     padding: 0;
-    background-color: black;
+    /* background-color: black; */
 }
