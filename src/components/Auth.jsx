@@ -3,7 +3,7 @@ import {auth, provider} from '../firebase-config'
 import { signInWithPopup} from 'firebase/auth'
 import Cookies from 'universal-cookie'
 const cookies = new Cookies()
-import { addDoc, setDoc, doc, collection } from 'firebase/firestore'
+import { addDoc, setDoc, doc, collection, getDoc } from 'firebase/firestore'
 import { db } from '../firebase-config'
 
 
@@ -16,16 +16,28 @@ const Auth = () => {
             console.log(result)
             cookies.set("auth-token",result.user.refreshToken)
 
+            
 
-            await setDoc(doc(db, "users", result.user.uid), {
+            const user = await getDoc(doc(db, "users", result.user.uid))
+            const userChats = await getDoc(doc(db, "userChats", result.user.uid))
+            
+            if (!user.exists()) {
+
+              await setDoc(doc(db, "users", result.user.uid), {
                 displayName: result.user.displayName,
                 email: result.user.email,
                 photoUrl: result.user.photoURL,
-                uid: result.user.uid
-              }, { merge: true })
+                uid: result.user.uid,
+              })
 
-            await setDoc(doc(db, "userChats", result.user.uid), {});
+              
+            }
+
+            if (!userChats.exists()){
+              await setDoc(doc(db, "userChats", result.user.uid), {})
+            }
             
+
 
         } catch (error) {
             console.error(error)

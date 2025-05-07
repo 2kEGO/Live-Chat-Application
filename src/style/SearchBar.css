@@ -1,0 +1,48 @@
+  /* Search bar section */
+.searchbar-container{
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+#searchbar-section {
+    flex-shrink: 0;
+    padding: 0.5rem 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-list-searchbar {
+    width: 90%;
+    display: flex;
+    align-items: center;
+
+    padding: 0.5rem;
+    border: 1px solid white;
+    border-radius: 30px;
+}
+
+.searchbar-symbol {
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.searchbar-input {
+    width: 90%;
+}
+
+.searchbar-input input {
+    width: 100%;
+    background-color: transparent;
+    border: 0;
+    outline: 0;
+    color: white;
+}

@@ -1,7 +1,7 @@
 import React from 'react'
 import "../style/room.css"
 import Chat from '../components/Chat'
-import Chat_List from '../components/Chat_List'
+import SideBar from './SideBar'
 
 const Room = () => {
   return (
@@ -9,7 +9,7 @@ const Room = () => {
         <div className="room-wrapper">
             
             <div className="chat-list-section">
-              <Chat_List/>
+              <SideBar/>
             </div>
             
             <div className="chat-section">
