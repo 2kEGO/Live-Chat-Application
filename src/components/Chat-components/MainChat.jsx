@@ -1,9 +1,9 @@
 import React from 'react'
-import "../style/room.css"
-import Chat from '../components/Chat'
+import "../../style/room.css"
+import Chat from './Chat'
 import SideBar from './SideBar'
 
-const Room = () => {
+const MainChat = () => {
   return (
     <div className="room-container">
         <div className="room-wrapper">
@@ -15,11 +15,10 @@ const Room = () => {
             <div className="chat-section">
               <Chat/>  
             </div>
-            
-
+          
         </div>
     </div>
   )
 }
 
-export default Room
+export default MainChat

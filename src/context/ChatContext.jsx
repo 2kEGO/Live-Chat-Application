@@ -5,6 +5,7 @@ import { AuthContext } from "./AuthContext";
   
   export const ChatContextProvider = ({ children }) => {
     const { currentUser } = useContext(AuthContext);
+    
     const INITIAL_STATE = {
       chatId: "null",
       user: {},
@@ -34,7 +35,3 @@ import { AuthContext } from "./AuthContext";
       </ChatContext.Provider>
     );
   };
-
-  export const displayUser = () => {
-    
-  }

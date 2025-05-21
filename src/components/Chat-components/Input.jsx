@@ -5,16 +5,16 @@ import {faImage, faPaperPlane, faIcons, faNoteSticky, faCircleInfo, faPaperclip}
 import { arrayUnion, doc, serverTimestamp, Timestamp, updateDoc,} from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { v4 as uuid } from "uuid";
-import { db, storage } from '../firebase-config';
+import { db, storage } from '../../firebase-config';
 
-import { AuthContext } from '../context/AuthContext';
-import { ChatContext } from '../context/ChatContext';
-import "../style/Input.css"
+import { AuthContext } from '../../context/AuthContext';
+import { ChatContext } from '../../context/ChatContext';
+import "../../style/Input.css"
 
 
 const Input = () => {
     const [text, setText] = useState("")
-    const [img, setImg] = useState(null);
+    // const [img, setImg] = useState(null);
 
     const { currentUser } = useContext(AuthContext);
     const { data } = useContext(ChatContext);
@@ -22,60 +22,52 @@ const Input = () => {
     const handleSend = async (e) => {
       e.preventDefault()
 
-      if (img) {
-        const storageRef = ref(storage, uuid());
-  
-        const uploadTask = uploadBytesResumable(storageRef, img);
-  
-        uploadTask.on(
-          (error) => {
-            console.error(error)
-          },
-          () => {
-            getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
-              await updateDoc(doc(db, "chats", data.chatId), {
-                messages: arrayUnion({
-                  id: uuid(),
-                  text,
-                  senderId: currentUser.uid,
-                  date: Timestamp.now(),
-                  img: downloadURL,
-                }),
-              });
-            });
-          }
-        );
-      } 
-      
-      else {
+      try {
+        
         await updateDoc(doc(db, "chats", data.chatId), {
           messages: arrayUnion({
             id: uuid(),
-            text,
+            text: text,
             senderId: currentUser.uid,
             date: Timestamp.now(),
           }),
         });
-        
+  
+    
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [data.chatId + ".lastMessage"]: {
+            text,
+          },
+          [data.chatId + ".date"]: serverTimestamp(),
+        });
+    
+        await updateDoc(doc(db, "userChats", data.user.uid), {
+          [data.chatId + ".lastMessage"]: {
+            text,
+          },
+          [data.chatId + ".date"]: serverTimestamp(),
+        });
 
+        await updateDoc(doc(db, "userChats", currentUser.uid), {
+          [data.chatId + ".lastMessage"]: {
+            text,
+          },
+          [data.chatId + ".date"]: serverTimestamp(),
+        });
+
+        await updateDoc(doc(db, "userChats", data.user.uid), {
+          [data.chatId + ".lastMessage"]: {
+            text,
+          },
+          [data.chatId + ".date"]: serverTimestamp(),
+        });
+
+      } catch (error) {
+        console.error(error)
       }
   
-      await updateDoc(doc(db, "userChats", currentUser.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-  
-      await updateDoc(doc(db, "userChats", data.user.uid), {
-        [data.chatId + ".lastMessage"]: {
-          text,
-        },
-        [data.chatId + ".date"]: serverTimestamp(),
-      });
-  
       setText("");
-      setImg(null);
+      // setImg(null);
     };
 
     
@@ -83,7 +75,7 @@ const Input = () => {
     <>
         <form className="send-message-wrapper" >
             
-            <div className="message-button-section">
+            {/* <div className="message-button-section">
               <input
                 type="file"
                 id="file"
@@ -94,7 +86,7 @@ const Input = () => {
               <label htmlFor="file" style={{ cursor: "pointer" }}>
                 <FontAwesomeIcon icon={faPaperclip} />
             </label>
-            </div>
+            </div> */}
 
             <div className="message-input-section">
               <input 

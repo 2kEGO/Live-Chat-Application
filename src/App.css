@@ -9,9 +9,13 @@
     --color-background: rgb(0, 0, 0);
     --color-background-lighter: rgb(32, 35, 39);
     --color-background-word: rgba(0, 0, 0, 0.082);
+    --color-border-white: rgb(38, 41, 43);
 
     --color-blue-button: #74C0FC;
     --color-blue-button-hover: rgb(32, 47, 59);
+
+    --color-btn-authpage: rgb(157, 110, 228);
+    --color-btn-authpage-hover: rgb(112, 78, 163);
 }
 * {
     padding: 0;
@@ -23,3 +27,9 @@ svg {
     height: 20px;
     width: 20px;
 }
+
+a{
+    text-decoration: none;
+    
+}
+

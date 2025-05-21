@@ -1,27 +1,37 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './App.css'
-import Auth from "../src/components/Auth.jsx"
-import Cookies from 'universal-cookie'
-import Room from './components/Room.jsx'
-const cookies = new Cookies()
+import HomePage from './Web-structure/HomePage.jsx'
+import Login from "./components/Auth-components/Login.jsx"
+import Register from './components/Auth-components/Register.jsx'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import ProtectedRoutes from './utils/ProtectedRoutes.jsx'
+import MainChat from './components/Chat-components/MainChat.jsx'
+import Home from './components/Blog-components/Home.jsx'
+
 
 function App() {
-  
-  const [auth, setAuth] = useState(cookies.get("auth-token"))
 
-  if (!auth){
-    return (
-    <>
-      <Auth/>
-    </>
-  )}
 
-  return(
-    <>
-    <Room/>
-    </>
+  return (
+    <BrowserRouter>
+      <Routes>
+        
+        <Route element={<ProtectedRoutes/>}>
+          
+          
+          <Route path='/' element={<HomePage/>}>
+            <Route path='messages' element={<MainChat/>}></Route>
+            <Route path='home' element={<Home/>}></Route>
+          </Route>
+
+        </Route>
+
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+
+      </Routes>
+    </BrowserRouter>
   )
-  
 }
 
 export default App

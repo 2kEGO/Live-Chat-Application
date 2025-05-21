@@ -1,32 +1,44 @@
 .room-container {
-    /* background-color: black; */
-    height: 100vh; /* Add this to fill screen */
-    background-color: black;
-  }
+  /* background-color: black; */
+    /* Add this to fill screen */
+  background-color: black;
+
+  height: 100%;
+  width: 100%;
+}
   
-  .room-wrapper {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%; /* Inherit full height from .room-container */
-  }
+.room-wrapper {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%; /* Inherit full height from .room-container */
+}
   
 
 .chat-list-section{
-    flex: 3;
-    height: 100%;
-    
-    border-right: 0.1px solid white;
-
-    
-
-
+  flex: 4;
+  height: 100%;
+  
+  border-right: .1px solid var(--color-border-white);
+  /* border-left: .1px solid var(--color-border-white); */
 }
 
 .chat-section{
-    flex: 7;
-    height: 100%;
-    /* border: 1px solid black; */
+  flex: 6;
+  height: 100%;
+  /* border: 1px solid black; */
+  padding: 0;
+  /* background-color: black; */
+  border-right: .1px solid var(--color-border-white);
+    
+}
+
+@media screen and (max-width: 999px){
+  .chat-list-section{
+    display: none;
+  }
+
+  .homepage-wrapper{
     padding: 0;
-    /* background-color: black; */
+  }
 }

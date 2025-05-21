@@ -1,9 +1,7 @@
-import React, {useState, useContext} from 'react'
-import "../style/chat.css"
-import {addDoc, collection, serverTimestamp} from 'firebase/firestore'
-import { db, auth } from '../firebase-config'
-import { ChatContext } from '../context/ChatContext'
-import Messages from './Message'
+import React, {useContext} from 'react'
+import "../../style/chat.css"
+import { ChatContext } from '../../context/ChatContext'
+import Messages from './Messages'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons'
@@ -16,6 +14,7 @@ import Input from './Input'
 const Chat = () => {
   
   const { data } = useContext(ChatContext);
+  
 
   return (
     

@@ -2,9 +2,9 @@ import React, {useState, useContext, useEffect} from 'react'
 import {faMagnifyingGlass} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { collection, query, where, getDocs, getDoc, setDoc, doc, updateDoc, serverTimestamp } from 'firebase/firestore'
-import { db } from '../firebase-config'
-import { AuthContext } from '../context/AuthContext.jsx'
-import '../style/SearchBar.css'
+import { db } from '../../firebase-config.js'
+import { AuthContext } from '../../context/AuthContext.jsx'
+import '../../style/SearchBar.css'
 
 
 const SearchBar = () => {
@@ -25,7 +25,6 @@ const SearchBar = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         setUser(doc.data());
-        console.log(doc.data())
       });
     } catch (err) {
       setErr(true);
@@ -39,43 +38,53 @@ const SearchBar = () => {
 
   const handleSelect = async () => {
 
-
+    
     //check whether the group(chats in firestore) exists, if not create
     const combinedId =
       currentUser.uid > user.uid
         ? currentUser.uid + user.uid
         : user.uid + currentUser.uid;
 
-    
     try {
-      
-      // const res1 = await getDoc(doc(db, "userChats", currentUser.uid))
-
 
       const res = await getDoc(doc(db, "chats", combinedId));
 
       if (!res.exists()) {
         //create a chat in chats collection
-        await setDoc(doc(db, "chats", combinedId), { messages: [] });
-
-        //create user chats
-
-        await updateDoc(doc(db, "userChats", currentUser.uid), {
-          [combinedId + ".userInfo"]: {
-            uid: user.uid,
-            displayName: user.displayName,
-            photoUrl: user.photoUrl,
-          },
-          [combinedId + ".date"]: serverTimestamp(),
+        await setDoc(doc(db, "chats", combinedId), {
+          messages: [],
         });
+
       }
+
+      //create user chats
+
+      await updateDoc(doc(db, "userChats", currentUser.uid), {
+        [combinedId + ".userInfo"]: {
+          uid: user.uid,
+          displayName: user.displayName,
+        },
+        [combinedId + ".date"]: serverTimestamp(),
+      });
+
+      await updateDoc(doc(db, "userChats", user.uid), {
+        [combinedId + ".userInfo"]: {
+          uid: currentUser.uid,
+          displayName: currentUser.displayName,
+        },
+        [combinedId + ".date"]: serverTimestamp(),
+      });
+      
+
     } catch (err) {
       console.error(err)
     }
 
     setUser(null);
     setUsername("")
+    console.log("User clicked:", user);
   };
+
     
   return (
     <>
@@ -110,7 +119,7 @@ const SearchBar = () => {
 
           <div className='user-info'>
 
-            <div className='user-info-display'>
+            <div className='user-info-display chat-display'>
               <span className='displayName'>{user.displayName}</span>
             </div>
 
