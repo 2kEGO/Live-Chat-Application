@@ -1,0 +1,37 @@
+.homepage-container{
+    min-height: 100vh;
+    width: 100%;
+
+    display: flex;
+}
+
+.homepage-blog{
+    height: 100%;
+    flex: 6;
+
+    display: flex;
+    flex-direction: column;
+    border-right: .1px solid var(--color-border-white);
+}
+
+.homepage-news{
+    height: 100%;
+    flex: 4;
+    border-right: .1px solid var(--color-border-white);
+}
+
+.homepage-item{
+    margin-top: 2vh;
+
+    width: 100%;
+    
+
+    border-bottom: .1px solid var(--color-border-white);
+}
+
+.homepage-blog-content{
+    width: 100%;
+    height: auto;
+
+    /* overflow-y: scroll; */
+}

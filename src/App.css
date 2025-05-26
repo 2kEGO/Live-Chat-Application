@@ -5,6 +5,8 @@
 :root {
     --font-inter: "Inter";
     --font-poppins: "Poppins";
+    --font-color-white: rgb(255, 255, 255);
+    --font-color-black: rgb(0, 0, 0);
 
     --color-background: rgb(0, 0, 0);
     --color-background-lighter: rgb(32, 35, 39);
@@ -16,6 +18,8 @@
 
     --color-btn-authpage: rgb(157, 110, 228);
     --color-btn-authpage-hover: rgb(112, 78, 163);
+
+    --color-postform-icon: #ffffff;
 }
 * {
     padding: 0;
