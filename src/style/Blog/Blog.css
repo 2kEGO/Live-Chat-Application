@@ -1,0 +1,40 @@
+
+
+.blog-wrapper{
+    padding: 1rem ;
+
+    display: flex;
+    flex-direction: row;
+}
+
+.blog-post-image{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 1rem;
+}
+
+.blog-content-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.username{
+    color: var(--font-color-white);
+}
+
+.blog-content{
+    color: var(--font-color-white);
+}
+
+.blog-content{
+    height: auto;
+}
+
+.blog-post-action{
+    display: flex;
+    flex-direction: row;
+}

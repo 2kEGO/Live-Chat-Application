@@ -24,7 +24,7 @@ const HomePageBanner = () => {
         </div>
 
         <div className="banner-item-button">
-          <button>Post</button>
+          <button className='post-btn'>Post</button>
         </div>
 
 
@@ -34,7 +34,7 @@ const HomePageBanner = () => {
         <div className="chat-list-user-info">
 
           <div className="chat-list-img">
-            <span>{currentUser.displayName?.charAt(0).toUpperCase()}</span>
+            <span className='display-userName'>{currentUser.displayName?.charAt(0).toUpperCase()}</span>
           </div>
 
           <div className='user-info'>

@@ -1,5 +1,4 @@
 .post-form{
-    width: 100%;
 }
 
 .post-form-wrapper{
@@ -22,7 +21,7 @@
     /* padding: 5px; */
 }
 
-.user-name span {
+.display-userName {
   aspect-ratio: 1;
   width: 2.5rem;
   border-radius: 50%;
@@ -43,31 +42,35 @@
 }
 
 .post-form-input {
-    min-height: 5vh;
-    
-    display: flex;
+  min-height: 5vh;
+  height: 100%; /* Ensure it can scale with parent */
+  display: flex;
 }
 
-.input-area{
-    width: 100%;
-    min-height: 50%;
-    padding: 0 1rem;
+.input-area {
+  flex: 1; /* This ensures full width and height inside a flex container */
+  padding: 0 1rem;
+  min-height: 5vh;
+  max-height: 20vh;
 
-    background-color: transparent;
-    color: var(--color-background-word);
-    overflow-wrap: break-word;
+  background-color: transparent;
+  color: var(--color-background-word);
+  overflow-wrap: break-word;
 
+  border: 0;
+
+  font-family: var(--font-poppins);
+  font-size: medium;
+  color: var(--font-color-white);
+
+  resize: none;
+  overflow-y: visible;
+  
+
+  &:focus {
     border: 0;
-
-    font-family: var(--font-poppins);
-    font-size: medium;
-    color: var(--font-color-white);
-
-
-    &:focus{
-        border: 0;
-        outline: 0;
-    }
+    outline: 0;
+  }
 }
 
 
@@ -85,24 +88,58 @@
 
 .form-icon {
   display: flex;
-  gap: 1rem;
+  gap: .5rem;
   align-items: center;
 }
 
 .icon-btn {
-  font-size: 1.25rem;
-  color: var(--color-postform-icon);
-  cursor: pointer;
-  transition: transform 0.2s ease, color 0.2s ease;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+    background-color: transparent;
+    border: 0;
+    border-radius: 50%;
+
+    height: 100%;
+    max-width: 2.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    /* height: 100%;
+    width: 100%; */
+
+
+    &:hover{
+    background-color: rgb(143, 137, 137);
+    }
+}
+
+.icon-btn svg{
+    color: var(--color-postform-icon);
+
+    height: 100%;
+    width: 50%;
 }
 
 .post-btn {
     color: var(--font-color-black);
-    background-color: white;
+    background-color: var(--color-postform-btn);
     font-family: var(--font-poppins);
     font-weight: 500;
 
     border: 0;
     padding: .5rem 2rem;
     border-radius: 4rem;
+    cursor: pointer;
+
+    &:hover{
+        background-color: rgb(211, 209, 209);
+    }
+
+    &:active{
+        transform: scale(0.98);
+        background-color: rgb(180, 180, 180); /* slightly darker for click feedback */
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
 }
