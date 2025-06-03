@@ -6,7 +6,7 @@
 }
 
 .homepage-blog{
-    height: 100%;
+    min-height: 100vh;
     flex: 6;
 
     display: flex;
@@ -22,10 +22,7 @@
 
 .homepage-item{
     margin-top: 2vh;
-
     width: 100%;
-    
-
     border-bottom: .1px solid var(--color-border-white);
 }
 

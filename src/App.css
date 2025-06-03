@@ -1,13 +1,25 @@
 @import url(https://fonts.googleapis.com/css?family=Inter:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
 @import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
-
+@import url(https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap);
 
 :root {
     --font-inter: "Inter";
     --font-poppins: "Poppins";
+    --font-helvetica: 'Inter', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+
     --font-color-white: rgb(255, 255, 255);
     --font-color-black: rgb(0, 0, 0);
 
+/* Blog-section */
+    --font-color-content-white: rgb(222, 224, 225);
+
+    --likes-button-color: rgb(228, 22, 117);
+    --likes-button-color-background: rgb(32, 9, 20);
+
+    --cmt-button-color:rgb(28, 148, 229);
+    --cmt-button-color-background:rgb(10, 23, 31);
+
+/* Basic-structure */
     --color-background: rgb(0, 0, 0);
     --color-background-lighter: rgb(32, 35, 39);
     --color-background-word: rgba(0, 0, 0, 0.082);

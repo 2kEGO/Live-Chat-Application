@@ -1,12 +1,14 @@
+// components/Blog/BlogContent.jsx
+import { useEffect, useState, useContext } from 'react';
 import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
 import { db } from '../../firebase-config';
-import "../../style/Blog/Blog.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment } from '@fortawesome/free-regular-svg-icons';
+import BlogItem from './BlogItem';
+import { AuthContext } from '../../context/AuthContext';
+import "../../style/Blog/Blog.css";
 
 const BlogContent = () => {
   const [blogs, setBlogs] = useState([]);
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     const q = query(collection(db, 'blogs'), orderBy('createdAt', 'desc'));
@@ -16,55 +18,21 @@ const BlogContent = () => {
         ...doc.data()
       }));
       setBlogs(blogData);
-      console.log(blogData)
     });
 
-    // Unsubscribe when component unmounts
     return () => unsubscribe();
   }, []);
 
+  if (!currentUser) return null;
+
+  if (blogs.length === 0) {
+    return <p>No blog posts yet.</p>;
+  }
+
   return (
     <>
-      {blogs.map((blog) => (
-        <div className="blog-container" key={blog.id}>
-          <div className="blog-wrapper">
-
-            <div className="blog-post-image">
-              <span className='display-userName'>{blog.userName?.charAt(0).toUpperCase()}</span>
-            </div>
-
-            <div className="blog-content-container">
-
-              <div className="blog-post-userdisplay">
-                <span className='username'>{blog.userName}</span>
-              </div>
-
-              <div className="blog-content">
-                <span className='blog-content'>{blog.content}</span>
-              </div>
-              
-              <div className="blog-post-action">
-
-                <div className="blog-post-btn">
-                  <button blog-post-likes-btn>
-                    <FontAwesomeIcon icon={faHeart} />
-                    <span>{blog.likes}</span>
-                  </button>
-                </div>
-
-                <div className="blog-post-btn">
-                  <button className='blog-post-cmt-btn'>
-                    <FontAwesomeIcon icon={faComment} />
-                    <span>{blog.comments?.length || 0}</span>
-                  </button>
-                </div>
-
-              </div>
-
-            </div>
-
-          </div>
-        </div>
+      {blogs.map(blog => (
+        <BlogItem key={blog.id} blog={blog} currentUser={currentUser} />
       ))}
     </>
   );
